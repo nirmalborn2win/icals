@@ -20,9 +20,9 @@ export class AppComponent {
 
  calendar(){
    let data={
-    startDate:"20171028T220000",
-    endDate:"20171028T223000",
-    title:"ios 10 test",
+    startDate:"20171029T220000",
+    endDate:"20171029T223000",
+    title:"ios 11 test",
     location:"At your Home",
     className:"btn btn-sm btn-default dropdown-toggle",
     description:"can u add in your icalendar?"
