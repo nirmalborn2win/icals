@@ -60,6 +60,7 @@ saveAs(icsBlob, fileName);
   }
   getIcsCalendar(data) {
     return [
+      'data:text/calendar;charset=utf8',
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
