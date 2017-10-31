@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 export class AppComponent {
   title = 'app';
   formatIcsText(str, maxLength) {
-    if(!str) {
+    if (!str) {
       return '';
     }
     str = str.replace(/\n/g, '\\n');
@@ -18,36 +18,34 @@ export class AppComponent {
     return str;
   }
 
- calendar(){
-   let data={
-    startDate:"20171029T220000",
-    endDate:"20171029T223000",
-    title:"ios 11 test",
-    location:"At your Home",
-    className:"btn btn-sm btn-default dropdown-toggle",
-    description:"can u add in your icalendar?"
-   }
-   let calendarUrl = {
-  
-    icalendar: this.getIcsCalendar(data),
-   
-  };
-   let fileName = this.getIcsFileName(this.title),
-   icsData = calendarUrl.icalendar,
-   icsBlob = this.getIcsBlob(icsData);
+  calendar() {
+    let data = {
+      startDate: "20171029T220000",
+      endDate: "20171029T223000",
+      title: "ios 11 test",
+      location: "At your Home",
+      className: "btn btn-sm btn-default dropdown-toggle",
+      description: "can u add in your icalendar?"
+    }
+    let calendarUrl = {
 
-saveAs(icsBlob, fileName);
-   
- }
-  
+      icalendar: this.getIcsCalendar(data),
+
+    };
+      let fileName = this.getIcsFileName(this.title),
+      icsData = calendarUrl.icalendar,
+      icsBlob = this.getIcsBlob(icsData);
+      saveAs(icsBlob, fileName);
+  }
+
   getIcsBlob(icsData) {
-    return new Blob([icsData], {
-      type: 'application/octet-stream'
+    return new Blob(icsData, {
+      type: 'text/calendar'
     });
   }
 
   getIcsFileName(title) {
-    if(!title) {
+    if (!title) {
       return 'event.ics';
     }
     return `${title.replace(/[^\w ]+/g, '')}.ics`;
@@ -60,7 +58,6 @@ saveAs(icsBlob, fileName);
   }
   getIcsCalendar(data) {
     return [
-      'data:text/calendar;charset=utf8',
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
