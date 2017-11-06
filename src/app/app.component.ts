@@ -4,10 +4,11 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: [ './app.component.css' ]
 })
 export class AppComponent {
   title = 'app';
+  public icalendar: string[];
   formatIcsText(str, maxLength) {
     if (!str) {
       return '';
@@ -19,27 +20,27 @@ export class AppComponent {
   }
 
   calendar() {
-    let data = {
-      startDate: "20171029T220000",
-      endDate: "20171029T223000",
-      title: "ios 11 test",
-      location: "At your Home",
-      className: "btn btn-sm btn-default dropdown-toggle",
-      description: "can u add in your icalendar?"
-    }
-    let calendarUrl = {
+    const data = {
+      startDate: '2017-11-11T12:00:00',
+      endDate: '2017-11-11T12:30:00',
+      title: 'ios 11 test',
+      location: 'At your Home',
+      className: 'btn btn-sm btn-default dropdown-toggle',
+      description: 'can u add in your icalendar?'
+    };
+    const calendarUrl = {
 
       icalendar: this.getIcsCalendar(data),
 
     };
-      let fileName = this.getIcsFileName(this.title),
+    const fileName = this.getIcsFileName(this.title),
       icsData = calendarUrl.icalendar,
       icsBlob = this.getIcsBlob(icsData);
-      saveAs(icsBlob, fileName);
+    saveAs(icsBlob, fileName);
   }
 
   getIcsBlob(icsData) {
-    return new Blob(icsData, {
+    return new Blob([ icsData ], {
       type: 'text/calendar'
     });
   }
