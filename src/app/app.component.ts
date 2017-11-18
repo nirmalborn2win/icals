@@ -54,27 +54,28 @@ export class AppComponent {
   getUid() {
     return Math.random().toString(36).substr(2);
   }
-  getTimeCreated() {
-    return moment().format('YYYYMMDDTHHmmss');
+  getTimeCreated(date?) {
+    return moment(date).format('YYYYMMDDTHHmmss');
   }
   getIcsCalendar(data) {
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
+      'PRODID:angularaddtocalendar',  
       'BEGIN:VEVENT',
-      'CLASS:PUBLIC',
-      'DESCRIPTION:' + this.formatIcsText(data.description, 62),
-      'DTSTART:' + data.startDate,
-      'DTEND:' + data.endDate,
-      'LOCATION:' + this.formatIcsText(data.location, 64),
+      'METHOD:REQUEST',
+      'DTSTAMP:' + this.getTimeCreated(),
+      'SEQUENCE:1',
+      'UID:' + this.getUid(),
+      'DTSTART:' + this.getTimeCreated(data.startDate),
+      'DTEND:' + this.getTimeCreated(data.endDate),
       'SUMMARY:' + this.formatIcsText(data.title, 66),
+      'DESCRIPTION:' + this.formatIcsText(data.description, 62), 
+      'LOCATION:' + this.formatIcsText(data.location, 64),
       'TRANSP:TRANSPARENT',
       'END:VEVENT',
-      'END:VCALENDAR',
-      'UID:' + this.getUid(),
-      'DTSTAMP:' + this.getTimeCreated(),
-      'PRODID:angular-addtocalendar'
-    ].join('\n');
+      'END:VCALENDAR'
+      ].join('\n');
   }
 
 }
